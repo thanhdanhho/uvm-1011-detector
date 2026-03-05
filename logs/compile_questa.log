@@ -1,0 +1,16 @@
+QuestaSim-64 vlog 2021.2_1 Compiler 2021.05 May 15 2021
+Start time: 00:07:24 on Mar 06,2026
+vlog -sv "+incdir+/home/danhht/Desktop/job/project_uvm/sim/../tb" "+incdir+/home/danhht/Desktop/job/project_uvm/sim/../tests" -L uvm -f /home/danhht/Desktop/job/project_uvm/sim/filelist.f 
+-- Compiling interface det_if
+-- Compiling module det_1011
+-- Compiling package det_pkg
+-- Importing package mtiUvm.uvm_pkg (uvm-1.1d Built-in)
+** Note: (vlog-2286) ../tb/pkg.sv(22): Using implicit +incdir+/home/danhht/Desktop/questa_sim/questasim/uvm-1.1d/../verilog_src/uvm-1.1d/src from import uvm_pkg
+-- Compiling package testbench_sv_unit
+-- Importing package det_pkg
+-- Compiling module testbench
+
+Top level modules:
+	testbench
+End time: 00:07:24 on Mar 06,2026, Elapsed time: 0:00:00
+Errors: 0, Warnings: 0
