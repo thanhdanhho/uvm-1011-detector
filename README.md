@@ -1,7 +1,3 @@
-<<<<<<< HEAD
-# uvm-1011-detector
-UVM Example Detect 1011
-=======
 ## READ ME UVM PROJECT DETECT 1011 
 ### Author Danh
 
