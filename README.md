@@ -40,11 +40,7 @@ make run_vcs TEST=test_random_long SEED=999 NUM_CYCLES=2000
 make regress_vcs
 ```
 
-## Waveform Viewing
 
-### VCS Generated Files (VCD + FSDB)
-- **VCD format**: `waves/vcs/<test>_<seed>_vcs.vcd` — text-based, portable
-- **FSDB format**: `waves/vcs/<test>_<seed>_vcs.fsdb` — binary (Verdi native), faster loading
 
 ```bash
 # GTKWave (open-source, best for VCD)
@@ -57,9 +53,6 @@ verdi -ssf waves/vcs/test_directed_1011_2_vcs.fsdb &
 dve -full64 -vpd waves/vcs/test_directed_1011_2_vcs.fsdb &
 ```
 
-### QuestaSim Generated Files
-- **VCD format**: `waves/questa/<test>_<seed>_questa.vcd`
-- **WLF format**: `waves/questa/<test>_<seed>_questa.wlf` (binary, faster loading)
 
 ```bash
 # QuestaSim GUI (native format)
@@ -72,34 +65,6 @@ gtkwave waves/questa/test_directed_1011_1_questa.vcd &
 **Wave files include**: `clk`, `rstn`, `in`, `out` (all DUT + interface signals).
 
 ---
-
-
-## Log Files
-
-All logs land in `logs/` with format `<TEST>_<SEED>_<tool>.log`:
-
-```
-logs/
-├── compile_questa.log
-├── compile_vcs.log
-├── test_directed_1011_1_questa.log
-├── test_random_long_42_vcs.log
-└── ...
-```
-
-All waveforms organized by tool in `waves/`:
-
-```
-waves/
-├── questa/
-│   ├── test_directed_1011_1_questa.vcd
-│   ├── test_directed_1011_1_questa.wlf
-│   └── ...
-└── vcs/
-    ├── test_directed_1011_1_vcs.vcd     (text-based, portable)
-    ├── test_directed_1011_1_vcs.fsdb    (binary, faster Verdi viewing)
-    └── ...
-```
 
 Quick scan for results:
 ```bash

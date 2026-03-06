@@ -1,9 +1,0 @@
-#!/bin/sh -h 
-PYTHONHOME=/opt/synopsys/vcs/X-2025.06/etc/search/pyh
-export PYTHONHOME
-PYTHONPATH=/opt/synopsys/vcs/X-2025.06/linux64/lib/pylib27
-export PYTHONPATH
-LD_LIBRARY_PATH=/opt/synopsys/vcs/X-2025.06/linux64/lib:/opt/synopsys/vcs/X-2025.06/linux64/lib/pylib27
-export LD_LIBRARY_PATH
-/opt/synopsys/vcs/X-2025.06/linux64/bin/vcsfind_create_index.exe  -z  "/home/danhht/workspace/uvm-1011-detector/sim/simv.daidir/debug_dump/fsearch/./idents_T3cZap.xml.gz" "/home/danhht/workspace/uvm-1011-detector/sim/simv.daidir/debug_dump/fsearch/./idents_tapi.xml.gz" -o "/home/danhht/workspace/uvm-1011-detector/sim/simv.daidir/debug_dump/fsearch/fsearch.db_tmp"
-\mv "/home/danhht/workspace/uvm-1011-detector/sim/simv.daidir/debug_dump/fsearch/fsearch.db_tmp" "/home/danhht/workspace/uvm-1011-detector/sim/simv.daidir/debug_dump/fsearch/fsearch.db"

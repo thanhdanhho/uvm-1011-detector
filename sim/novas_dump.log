@@ -90,13 +90,13 @@ ANF: vhdi_enc_ist_get_module_id('/home/danhht/workspace/uvm-1011-detector/sim/si
 ANF: vhdi_enc_def_get_handle_by_module_id('/home/danhht/workspace/uvm-1011-detector/sim/simv: undefined symbol: vhdi_enc_def_get_handle_by_module_id')
 VCS compile option:
  option[0]: /home/danhht/workspace/uvm-1011-detector/sim/simv
- option[1]: +UVM_TESTNAME=test_random_long
- option[2]: +ntb_random_seed=100
+ option[1]: +UVM_TESTNAME=test_directed_1011
+ option[2]: +ntb_random_seed=5
  option[3]: +UVM_VERBOSITY=UVM_LOW
  option[4]: +OVERLAP_EN=1
- option[5]: +NUM_CYCLES=2000
+ option[5]: +NUM_CYCLES=1000
  option[6]: +DUMP_WAVE=1
- option[7]: +WAVE_FILE=/home/danhht/workspace/uvm-1011-detector/sim/../waves/vcs/test_random_long_100_vcs.vcd
+ option[7]: +WAVE_FILE=/home/danhht/workspace/uvm-1011-detector/sim/../waves/vcs/test_directed_1011_5_vcs.vcd
  option[8]: /opt/synopsys/vcs/X-2025.06/linux64/bin/vcs1fe
  option[9]: -Mcc=gcc
  option[10]: -Mcplusplus=g++
@@ -161,7 +161,7 @@ stacksize		8307 kbytes
 coredumpsize		unlimited
 memoryuse		unlimited
 vmemoryuse		unlimited
-descriptors		524288
+descriptors		1024
 memorylocked		8192 kbytes
 maxproc		252872
 ======================================
@@ -169,83 +169,89 @@ maxproc		252872
 
 Runtime environment variables:
 SHELL=/bin/bash
-COLORTERM=truecolor
-HISTCONTROL=ignorespace
+HISTCONTROL=ignoredups
 no_proxy=localhost,127.0.0.1,::1,.fpt.vn
-TERM_PROGRAM_VERSION=1.108.2
+EXTRACT_MIM_CAP=2P0FF_OPT_B
 HISTSIZE=1000
 HOSTNAME=hw-station-9
 VCS_HOME=/opt/synopsys/vcs/X-2025.06
-MAKE_TERMOUT=/dev/pts/16
+MIMCAP_SELECTION=OPT_B
+MAKE_TERMOUT=/dev/pts/7
 SYN_DC_HOME=/opt/synopsys/syn/X-2025.06-SP5
 VERDI_HOME=/opt/synopsys/verdi/X-2025.06
+EDITOR=vi
+TOPMETAL=11KA
+PROJECT_DIR=/home/danhht/pd/pdk-setup/gf180mcu
 PWD=/home/danhht/workspace/uvm-1011-detector/sim
 LOGNAME=danhht
 XDG_SESSION_TYPE=tty
 MODULESHOME=/usr/share/Modules
+GF_PDK_HOME=/home/danhht/workspace/pd/pdk-gf180mcu/combined-pdk/dk_synopsys/pdk-180/LVS_ICV
 MAKEOVERRIDES=${-*-command-variables-*-}
 _=/home/danhht/workspace/uvm-1011-detector/sim/simv
-VSCODE_GIT_ASKPASS_NODE=/home/danhht/.vscode-server/cli/servers/Stable-c9d77990917f3102ada88be140d28b038d1dd7c7/server/node
+BEOL_STACK=1P5M
 ftp_proxy=http://proxy.hcm.fpt.vn:80
 ARM_HOME=/opt/arm
 MOTD_SHOWN=pam
 HOME=/home/danhht
 XA_HOME=/opt/synopsys/xa/X-2025.06-SP2-2
 LANG=en_US.UTF-8
-SEED=100
+SEED=5
 LS_COLORS=rs=0:di=01;34:ln=01;36:mh=00:pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:or=40;31;01:mi=01;37;41:su=37;41:sg=30;43:ca=30;41:tw=30;42:ow=34;42:st=37;44:ex=01;32:*.tar=01;31:*.tgz=01;31:*.arc=01;31:*.arj=01;31:*.taz=01;31:*.lha=01;31:*.lz4=01;31:*.lzh=01;31:*.lzma=01;31:*.tlz=01;31:*.txz=01;31:*.tzo=01;31:*.t7z=01;31:*.zip=01;31:*.z=01;31:*.dz=01;31:*.gz=01;31:*.lrz=01;31:*.lz=01;31:*.lzo=01;31:*.xz=01;31:*.zst=01;31:*.tzst=01;31:*.bz2=01;31:*.bz=01;31:*.tbz=01;31:*.tbz2=01;31:*.tz=01;31:*.deb=01;31:*.rpm=01;31:*.jar=01;31:*.war=01;31:*.ear=01;31:*.sar=01;31:*.rar=01;31:*.alz=01;31:*.ace=01;31:*.zoo=01;31:*.cpio=01;31:*.7z=01;31:*.rz=01;31:*.cab=01;31:*.wim=01;31:*.swm=01;31:*.dwm=01;31:*.esd=01;31:*.jpg=01;35:*.jpeg=01;35:*.mjpg=01;35:*.mjpeg=01;35:*.gif=01;35:*.bmp=01;35:*.pbm=01;35:*.pgm=01;35:*.ppm=01;35:*.tga=01;35:*.xbm=01;35:*.xpm=01;35:*.tif=01;35:*.tiff=01;35:*.png=01;35:*.svg=01;35:*.svgz=01;35:*.mng=01;35:*.pcx=01;35:*.mov=01;35:*.mpg=01;35:*.mpeg=01;35:*.m2v=01;35:*.mkv=01;35:*.webm=01;35:*.webp=01;35:*.ogm=01;35:*.mp4=01;35:*.m4v=01;35:*.mp4v=01;35:*.vob=01;35:*.qt=01;35:*.nuv=01;35:*.wmv=01;35:*.asf=01;35:*.rm=01;35:*.rmvb=01;35:*.flc=01;35:*.avi=01;35:*.fli=01;35:*.flv=01;35:*.gl=01;35:*.dl=01;35:*.xcf=01;35:*.xwd=01;35:*.yuv=01;35:*.cgm=01;35:*.emf=01;35:*.ogv=01;35:*.ogx=01;35:*.aac=01;36:*.au=01;36:*.flac=01;36:*.m4a=01;36:*.mid=01;36:*.midi=01;36:*.mka=01;36:*.mp3=01;36:*.mpc=01;36:*.ogg=01;36:*.ra=01;36:*.wav=01;36:*.oga=01;36:*.opus=01;36:*.spx=01;36:*.xspf=01;36:
-SSL_CERT_DIR=/etc/pki/tls/certs
-GIT_ASKPASS=/home/danhht/.vscode-server/cli/servers/Stable-c9d77990917f3102ada88be140d28b038d1dd7c7/server/extensions/git/dist/askpass.sh
+ICV_LVS=/home/danhht/workspace/pd/pdk-gf180mcu/combined-pdk/dk_synopsys/pdk-180/LVS_ICV/LVS/ICV
 https_proxy=http://proxy.hcm.fpt.vn:80
-SSH_CONNECTION=172.27.54.16 38910 172.27.54.20 2702
+SSH_CONNECTION=172.27.54.16 55492 172.27.54.20 2702
+OPENPDKS_DIR_PATH=share/pdk
 VERDI_64BIT=1
 MFLAGS=
-VSCODE_GIT_ASKPASS_EXTRA_ARGS=
-VSCODE_PYTHON_AUTOACTIVATE_GUARD=1
+OPENPDKS_FLAVOR=gf180mcuD
+CUDA_VISIBLE_DEVICES=
 XDG_SESSION_CLASS=user
-MAKEFLAGS= -- NUM_CYCLES=2000 SEED=100 TEST=test_random_long
+MAKEFLAGS= -- SEED=5 TEST=test_directed_1011
 SNPSLMD_LICENSE_FILE=27021@172.27.218.250
+OPENPDKS_DIR_BASE=/home/danhht/workspace/pd/pdk-gf180mcu/combined-pdk/dk_synopsys/pdk-180/../../dk_open
+PDK_DIR=/home/danhht/workspace/pd/pdk-gf180mcu/combined-pdk/dk_synopsys/pdk-180
 SELINUX_ROLE_REQUESTED=
 TERM=xterm-256color
 SOCRATES_HOME=/opt/arm/tools/socrates
-NUM_CYCLES=2000
 LESSOPEN=||/usr/bin/lesspipe.sh %s
 USER=danhht
-GIT_PAGER=cat
-MAKE_TERMERR=/dev/pts/16
-VSCODE_GIT_IPC_HANDLE=/run/user/1005/vscode-git-76d8aca533.sock
+MAKE_TERMERR=/dev/pts/7
 FTP_PROXY=http://proxy.hcm.fpt.vn:80
 MODULES_RUN_QUARANTINE=LD_LIBRARY_PATH LD_PRELOAD
 LOADEDMODULES=
 SELINUX_USE_CURRENT_RANGE=
-SHLVL=4
+DISPLAY=localhost:11.0
+SHLVL=2
+RECOMMENDED_GUIDELINES=NO
 MAKELEVEL=1
 HTTPS_PROXY=http://proxy.hcm.fpt.vn:80
 HTTP_PROXY=http://proxy.hcm.fpt.vn:80
-XDG_SESSION_ID=54
+XDG_SESSION_ID=50
 http_proxy=http://proxy.hcm.fpt.vn:80
+GUARD_RING=FOUNDRY
+MOS_NF_BY=COUNT
 LD_LIBRARY_PATH=/usr/lib:/usr/lib64
 XDG_RUNTIME_DIR=/run/user/1005
-SSL_CERT_FILE=/etc/pki/ca-trust/extracted/pem/tls-ca-bundle.pem
 SYNOPSYS_HOME=/opt/synopsys
-SSH_CLIENT=172.27.54.16 38910 2702
+SSH_CLIENT=172.27.54.16 55492 2702
 __MODULES_LMINIT=module use --append /usr/share/Modules/modulefiles:module use --append /etc/modulefiles:module use --append /usr/share/modulefiles
 DEBUGINFOD_IMA_CERT_PATH=/etc/keys/ima:
+ICV_DRC=/home/danhht/workspace/pd/pdk-gf180mcu/combined-pdk/dk_synopsys/pdk-180/DRC_ICV/DRC/ICV
 which_declare=declare -f
-VSCODE_GIT_ASKPASS_MAIN=/home/danhht/.vscode-server/cli/servers/Stable-c9d77990917f3102ada88be140d28b038d1dd7c7/server/extensions/git/dist/askpass-main.js
 XDG_DATA_DIRS=/home/danhht/.local/share/flatpak/exports/share:/var/lib/flatpak/exports/share:/usr/local/share:/usr/share
-BROWSER=/home/danhht/.vscode-server/cli/servers/Stable-c9d77990917f3102ada88be140d28b038d1dd7c7/server/bin/helpers/browser.sh
-PATH=/opt/synopsys/vcs/X-2025.06/linux64/bin:/opt/synopsys/verdi/X-2025.06/bin:/opt/synopsys/syn/X-2025.06-SP5/bin:/opt/synopsys/xa/X-2025.06-SP2-2/bin:/opt/arm/tools/socrates:/home/danhht/.vscode-server/data/User/globalStorage/github.copilot-chat/debugCommand:/home/danhht/.vscode-server/data/User/globalStorage/github.copilot-chat/copilotCli:/home/danhht/.vscode-server/cli/servers/Stable-c9d77990917f3102ada88be140d28b038d1dd7c7/server/bin/remote-cli:/opt/synopsys/verdi/X-2025.06/bin:/opt/synopsys/syn/X-2025.06-SP5/bin:/opt/synopsys/xa/X-2025.06-SP2-2/bin:/opt/arm/tools/socrates:/home/danhht/.local/bin:/home/danhht/bin:/opt/synopsys/verdi/X-2025.06/bin:/opt/synopsys/syn/X-2025.06-SP5/bin:/opt/synopsys/xa/X-2025.06-SP2-2/bin:/usr/share/Modules/bin:/opt/arm/tools/socrates:/usr/local/bin:/usr/bin:/usr/local/sbin:/usr/sbin
+PATH=/opt/synopsys/vcs/X-2025.06/linux64/bin:/opt/synopsys/vcs/X-2025.06/bin:/opt/synopsys/vcs/X-2025.06/bin:/opt/synopsys/starrc/X-2025.06-SP3/bin:/opt/synopsys/icvalidator/X-2025.06-SP2/bin:/opt/synopsys/hspice/X-2025.06-SP2/hspice/bin:/opt/synopsys/customcompiler/X-2025.06-SP2/bin:/home/danhht/.local/bin:/home/danhht/bin:/opt/synopsys/verdi/X-2025.06/bin:/opt/synopsys/syn/X-2025.06-SP5/bin:/opt/synopsys/xa/X-2025.06-SP2-2/bin:/usr/share/Modules/bin:/opt/arm/tools/socrates:/usr/local/bin:/usr/bin:/usr/local/sbin:/usr/sbin
 SELINUX_LEVEL_REQUESTED=
 MODULEPATH=/usr/share/Modules/modulefiles:/etc/modulefiles:/usr/share/modulefiles
+PADBONDING=WEDGE
 DBUS_SESSION_BUS_ADDRESS=unix:path=/run/user/1005/bus
 MAIL=/var/spool/mail/danhht
-TEST=test_random_long
-OLDPWD=/home/danhht/workspace/uvm-1011-detector/sim
+SSH_TTY=/dev/pts/7
+LATCH_CHECK=DECK_PLUS_USER
+TEST=test_directed_1011
+OLDPWD=/home/danhht/workspace/uvm-1011-detector
 NOVAS_HOME=/opt/synopsys/verdi/X-2025.06
 MODULES_CMD=/usr/share/Modules/libexec/modulecmd.tcl
-TERM_PROGRAM=vscode
-VSCODE_IPC_HOOK_CLI=/run/user/1005/vscode-ipc-a2ef5a95-b156-4e87-a64a-72a2cc4f6b1a.sock
 BASH_FUNC_ml%%=() {  module ml "$@"
 }
 BASH_FUNC_which%%=() {  ( alias;
@@ -288,52 +294,52 @@ SPECMAN_OUTPUT_TO_TTY=1
 FLEXLM_BORROWFILE=/home/danhht/.hw-station-9-borrow.txt
 Runtime command line arguments:
 argv[0]=/home/danhht/workspace/uvm-1011-detector/sim/simv
-argv[1]=+UVM_TESTNAME=test_random_long
-argv[2]=+ntb_random_seed=100
+argv[1]=+UVM_TESTNAME=test_directed_1011
+argv[2]=+ntb_random_seed=5
 argv[3]=+UVM_VERBOSITY=UVM_LOW
 argv[4]=+OVERLAP_EN=1
-argv[5]=+NUM_CYCLES=2000
+argv[5]=+NUM_CYCLES=1000
 argv[6]=+DUMP_WAVE=1
-argv[7]=+WAVE_FILE=/home/danhht/workspace/uvm-1011-detector/sim/../waves/vcs/test_random_long_100_vcs.vcd
+argv[7]=+WAVE_FILE=/home/danhht/workspace/uvm-1011-detector/sim/../waves/vcs/test_directed_1011_5_vcs.vcd
 **********Message Rewind**************
-268 profile - 100
-          CPU/Mem usage: 0.020 sys,  0.100 user,  240.95M mem
-269 Elapsed time:    0:00:00    Fri Mar  6 15:38:57 2026
-270 User CPU time used: 0 seconds
-271 System CPU time used: 0 seconds
-272 pliAppInit
-273 FSDB_GATE is set.
-274 FSDB_RTL is set.
-275 FSDB_DYNAMIC_ALIAS is enabled.
-276 libnuma.so open fail. libnuma.so: cannot open shared object file: No such file or directory
-277 FSDB NUMA optimize not available.
-278 FSDB_PACKED_MODE is enabled.
-279 FSDB_GATE_PACKED is enabled.
-280 [SC]Init: MemoryConsumed=0.00MB ElapsedTime=0hour 0min. 0sec.
-281 FSDB_REDUCE_VC_MEM is enabled.
-282 Enable Parallel Dumping.
-283 pliAppMiscSet: New Sim Round
-284 pliEntryInit
-285 LIBSSCORE=found /opt/synopsys/verdi/X-2025.06/share/PLI/lib/LINUXAMD64/libsscore_vcs202506.so through $NOVAS_HOME setting.
-286 FSDB Dumper for VCS, Release Verdi_X-2025.06, Linux x86_64/64bit, 05/31/2025
-287 (C) 1996 - 2025 by Synopsys, Inc.
-288 sps_call_fsdbDumpfile_main at 0 : ../tb/testbench.sv(58)
-289 argv[0]: (handle) testbench.fsdb_file
-290 *Verdi* : Create FSDB file '/home/danhht/workspace/uvm-1011-detector/sim/../waves/vcs/test_random_long_100_vcs.fsdb'
-291 [spi_vcs_vd_ppi_create_root]: no upf option
-292 DUMPER_MEMORY_REDUCTION is enabled.
-293 compile option from '/home/danhht/workspace/uvm-1011-detector/sim/simv.daidir/vcs_rebuild'.
-294   "vcs '-sverilog' '-ntb_opts' 'uvm' '+incdir+/home/danhht/workspace/uvm-1011-detector/sim/../tb' '+incdir+/home/danhht/workspace/uvm-1011-detector/sim/../tests' '-timescale=1ns/1ps' '-full64' '-debug_access+all' '-o' '/home/danhht/workspace/uvm-1011-detector/sim/simv' '-f' '/home/danhht/workspace/uvm-1011-detector/sim/filelist.f' 2>&1"
-295 DVDI_is_vir_unload_enabled is enable
-296 FSDB_VCS_ENABLE_NATIVE_VC is enable
-297 FSDB_VCS_ENABLE_MEMORY_NATIVE_VC is enabled
-298 sps_call_fsdbDumpvars_vd_main at 0 : ../tb/testbench.sv(59)
-299 argv[0]: (0)
-300 argv[1]: (handle) testbench
-301 *Verdi* : Begin traversing the scope (testbench), layer (0).
-302 *Verdi* : End of traversing.
-303 pliAppHDL_DumpVarComplete traverse var: profile - 
-          CPU/Mem usage: 0.020 sys,  0.100 user,  342.78M mem
+274 profile - 100
+          CPU/Mem usage: 0.030 sys,  0.090 user,  240.59M mem
+275 Elapsed time:    0:00:00    Fri Mar  6 16:10:27 2026
+276 User CPU time used: 0 seconds
+277 System CPU time used: 0 seconds
+278 pliAppInit
+279 FSDB_GATE is set.
+280 FSDB_RTL is set.
+281 FSDB_DYNAMIC_ALIAS is enabled.
+282 libnuma.so open fail. libnuma.so: cannot open shared object file: No such file or directory
+283 FSDB NUMA optimize not available.
+284 FSDB_PACKED_MODE is enabled.
+285 FSDB_GATE_PACKED is enabled.
+286 [SC]Init: MemoryConsumed=0.00MB ElapsedTime=0hour 0min. 0sec.
+287 FSDB_REDUCE_VC_MEM is enabled.
+288 Enable Parallel Dumping.
+289 pliAppMiscSet: New Sim Round
+290 pliEntryInit
+291 LIBSSCORE=found /opt/synopsys/verdi/X-2025.06/share/PLI/lib/LINUXAMD64/libsscore_vcs202506.so through $NOVAS_HOME setting.
+292 FSDB Dumper for VCS, Release Verdi_X-2025.06, Linux x86_64/64bit, 05/31/2025
+293 (C) 1996 - 2025 by Synopsys, Inc.
+294 sps_call_fsdbDumpfile_main at 0 : ../tb/testbench.sv(58)
+295 argv[0]: (handle) testbench.fsdb_file
+296 *Verdi* : Create FSDB file '/home/danhht/workspace/uvm-1011-detector/sim/../waves/vcs/test_directed_1011_5_vcs.fsdb'
+297 [spi_vcs_vd_ppi_create_root]: no upf option
+298 DUMPER_MEMORY_REDUCTION is enabled.
+299 compile option from '/home/danhht/workspace/uvm-1011-detector/sim/simv.daidir/vcs_rebuild'.
+300   "vcs '-sverilog' '-ntb_opts' 'uvm' '+incdir+/home/danhht/workspace/uvm-1011-detector/sim/../tb' '+incdir+/home/danhht/workspace/uvm-1011-detector/sim/../tests' '-timescale=1ns/1ps' '-full64' '-debug_access+all' '-o' '/home/danhht/workspace/uvm-1011-detector/sim/simv' '-f' '/home/danhht/workspace/uvm-1011-detector/sim/filelist.f' 2>&1"
+301 DVDI_is_vir_unload_enabled is enable
+302 FSDB_VCS_ENABLE_NATIVE_VC is enable
+303 FSDB_VCS_ENABLE_MEMORY_NATIVE_VC is enabled
+304 sps_call_fsdbDumpvars_vd_main at 0 : ../tb/testbench.sv(59)
+305 argv[0]: (0)
+306 argv[1]: (handle) testbench
+307 *Verdi* : Begin traversing the scope (testbench), layer (0).
+308 *Verdi* : End of traversing.
+309 pliAppHDL_DumpVarComplete traverse var: profile - 
+          CPU/Mem usage: 0.030 sys,  0.090 user,  342.43M mem
                    incr: 0.000 sys,  0.000 user,  11.36M mem
                    accu: 0.000 sys,  0.000 user,  11.36M mem
               accu incr: 0.000 sys,  0.000 user,  11.36M mem
@@ -342,12 +348,12 @@ argv[7]=+WAVE_FILE=/home/danhht/workspace/uvm-1011-detector/sim/../waves/vcs/tes
                  incr: 20 var,  20 idcode,  14 callback
                  accu: 20 var,  20 idcode,  14 callback
             accu incr: 20 var,  20 idcode,  14 callback
-304 Idcode  0 - bc1:0  mda:0
-305 Elapsed time:    0:00:00    Fri Mar  6 15:38:57 2026
-306 User CPU time used: 0 seconds
-307 System CPU time used: 0 seconds
-308 pliAppHDL_DumpVarComplete: profile - 
-          CPU/Mem usage: 0.020 sys,  0.100 user,  342.78M mem
+310 Idcode  0 - bc1:0  mda:0
+311 Elapsed time:    0:00:00    Fri Mar  6 16:10:27 2026
+312 User CPU time used: 0 seconds
+313 System CPU time used: 0 seconds
+314 pliAppHDL_DumpVarComplete: profile - 
+          CPU/Mem usage: 0.030 sys,  0.090 user,  342.43M mem
                    incr: 0.000 sys,  0.000 user,  0.00M mem
                    accu: 0.000 sys,  0.000 user,  11.36M mem
               accu incr: 0.000 sys,  0.000 user,  0.00M mem
@@ -356,34 +362,34 @@ argv[7]=+WAVE_FILE=/home/danhht/workspace/uvm-1011-detector/sim/../waves/vcs/tes
                  incr: 0 var,  0 idcode,  0 callback
                  accu: 20 var,  20 idcode,  14 callback
             accu incr: 0 var,  0 idcode,  0 callback
-309 Idcode  0 - bc1:0  mda:0
-310 Elapsed time:    0:00:00    Fri Mar  6 15:38:57 2026
-311 User CPU time used: 0 seconds
-312 System CPU time used: 0 seconds
-313 End of simulation at 20185000
-314 Memory usage: 360.952 M
-315 Maximum resident set size: 160 MB
-316 Hard page faults: 0
-317 Soft page faults: 25799
-318 Elapsed time:    0:00:00    Fri Mar  6 15:38:57 2026
-319 User CPU time used: 0 seconds
-320 System CPU time used: 0 seconds
-321 Begin FSDB profile info:
-322 FSDB Writer : bc1(11788) bcn(3256) mtf/stf(0/0)
-FSDB Writer elapsed time : flush(0.006063) io wait(0.000000) theadpool wait(0.000000)
+315 Idcode  0 - bc1:0  mda:0
+316 Elapsed time:    0:00:00    Fri Mar  6 16:10:27 2026
+317 User CPU time used: 0 seconds
+318 System CPU time used: 0 seconds
+319 End of simulation at 265000
+320 Memory usage: 343.671 M
+321 Maximum resident set size: 145 MB
+322 Hard page faults: 0
+323 Soft page faults: 22374
+324 Elapsed time:    0:00:00    Fri Mar  6 16:10:27 2026
+325 User CPU time used: 0 seconds
+326 System CPU time used: 0 seconds
+327 Begin FSDB profile info:
+328 FSDB Writer : bc1(136) bcn(16) mtf/stf(0/0)
+FSDB Writer elapsed time : flush(0.005667) io wait(0.000000) theadpool wait(0.000000)
 FSDB Writer cpu time : MT Compression : 0
-323 End FSDB profile info
-324 FSDB closed. Name: /home/danhht/workspace/uvm-1011-detector/sim/../waves/vcs/test_random_long_100_vcs.fsdb Size: 13613
-325 Parallel profile     - ProducerThread:1 ConsumerThread:1 Buffer:64MB
-326                      - BlockUsed:1 Acquire:0 BufferUsed:258385
-327                      - Flush:3 Expand:0 ProducerWait:0 ConsumerWait:0
-328                      - MainProducerTime:0.191002785 TotalConsumerTime:0.000000000
-329                      - ElapsedTime:0.091542000
-330 Producer   0 profile - BlockUsed:2 Acquire:0 BufferUsed:258385
-331 Consumer   0 profile - Affinity:-1 CPUTime:0.000000000 LifeTime:0.000000000 (-nan%)
-332                      - BlockUsed:2 Acquire:0 BufferUsed:258385
-333 SimExit
-334 Elapsed time:    0:00:00    Fri Mar  6 15:38:57 2026
-335 User CPU time used: 0 seconds
-336 System CPU time used: 0 seconds
-337 Sim process exit
+329 End FSDB profile info
+330 FSDB closed. Name: /home/danhht/workspace/uvm-1011-detector/sim/../waves/vcs/test_directed_1011_5_vcs.fsdb Size: 10116
+331 Parallel profile     - ProducerThread:1 ConsumerThread:1 Buffer:64MB
+332                      - BlockUsed:1 Acquire:0 BufferUsed:2635
+333                      - Flush:3 Expand:0 ProducerWait:0 ConsumerWait:0
+334                      - MainProducerTime:0.138251098 TotalConsumerTime:0.000000000
+335                      - ElapsedTime:0.040613000
+336 Producer   0 profile - BlockUsed:2 Acquire:0 BufferUsed:2635
+337 Consumer   0 profile - Affinity:-1 CPUTime:0.000000000 LifeTime:0.000000000 (-nan%)
+338                      - BlockUsed:2 Acquire:0 BufferUsed:2635
+339 SimExit
+340 Elapsed time:    0:00:00    Fri Mar  6 16:10:27 2026
+341 User CPU time used: 0 seconds
+342 System CPU time used: 0 seconds
+343 Sim process exit
