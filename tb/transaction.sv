@@ -1,10 +1,7 @@
 //------------------------------------------------------------------------------
 // Class : det_transaction
 // Description: UVM sequence item representing one clock cycle of stimulus.
-//   din  - serial bit driven to DUT.in
-//   rstn - reset signal driven to DUT.rstn (default 1 = no reset)
-//   dout - detection output sampled from DUT.out (filled by monitor, not rand)
-//------------------------------------------------------------------------------
+
 class det_transaction extends uvm_sequence_item;
 
     rand logic din;   // serial input bit (randomized by sequences)

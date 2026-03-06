@@ -1,11 +1,7 @@
 //------------------------------------------------------------------------------
 // Class : test_reset_basic
 // Description: Verifies correct reset behavior.
-//   1. After the driver's automatic 5-cycle reset, send a 1011 pattern (detect).
-//   2. Inject a mid-simulation 3-cycle reset.
-//   3. After reset, send another 1011 pattern to confirm recovery.
-//   Scoreboard verifies out=0 during reset and correct detection before/after.
-//------------------------------------------------------------------------------
+
 class test_reset_basic extends det_base_test;
     `uvm_component_utils(test_reset_basic)
 

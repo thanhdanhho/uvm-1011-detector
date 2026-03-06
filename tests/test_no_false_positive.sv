@@ -3,9 +3,7 @@
 // Description: Negative test — sends near-miss and unrelated patterns.
 //              Verifies that the DUT does NOT produce a spurious detection.
 //   Patterns: 1010, 1001, 0111, 1110, 0101, 00000000, 11111111, 1010101010
-//   Expected: scoreboard sees dout=0 for every cycle.
-//   A UVM_ERROR fires if any unexpected detection is seen.
-//------------------------------------------------------------------------------
+
 class test_no_false_positive extends det_base_test;
     `uvm_component_utils(test_no_false_positive)
 

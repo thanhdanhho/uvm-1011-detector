@@ -3,8 +3,7 @@
 // Description: Directed test — sends the exact 1011 pattern and verifies
 //              that exactly one detection pulse is produced.
 //   Sequence: [4 idles] 1 0 1 1 [4 idles]
-//   Expected: scoreboard sees dout=1 in the clock cycle after "1011" completes.
-//------------------------------------------------------------------------------
+
 class test_directed_1011 extends det_base_test;
     `uvm_component_utils(test_directed_1011)
 

@@ -3,19 +3,7 @@
 // Description: Aggregates all UVM testbench source files in strict
 //              compilation order. Any file that references a class must
 //              appear AFTER the file defining that class.
-//
-// Compile order:
-//   1. transaction    – uvm_sequence_item (no TB deps)
-//   2. sequencer      – typedef (needs transaction)
-//   3. sequence       – all sequence classes (needs transaction, sequencer)
-//   4. driver         – (needs transaction)
-//   5. monitor        – (needs transaction)
-//   6. scoreboard     – (needs transaction)
-//   7. agent          – (needs sequencer, driver, monitor)
-//   8. environment    – (needs agent, scoreboard)
-//   9. base_test      – (needs environment, all sequences)
-//  10. test_*         – concrete tests (need base_test, sequences)
-//==============================================================================
+
 package det_pkg;
 
     import uvm_pkg::*;

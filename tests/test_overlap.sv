@@ -4,8 +4,7 @@
 //   OVERLAP_EN=1 (default): sends 1011011 → expects 2 detections (overlap).
 //   OVERLAP_EN=0          : sends 1011 [gap] 1011 → expects 2 detections
 //                           (non-overlap, gap prevents reuse of trailing bits).
-//   The golden scoreboard handles both cases correctly.
-//------------------------------------------------------------------------------
+
 class test_overlap extends det_base_test;
     `uvm_component_utils(test_overlap)
 

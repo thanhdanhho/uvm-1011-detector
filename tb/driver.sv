@@ -1,10 +1,7 @@
 //------------------------------------------------------------------------------
 // Class : det_driver
 // Description: UVM driver for det_1011.
-//   - Performs the initial 5-cycle reset before processing transactions.
-//   - Drives rstn and in via the driver clocking block (1ns after posedge).
-//   - Transactions with rstn=0 allow mid-simulation reset injection.
-//------------------------------------------------------------------------------
+
 class det_driver extends uvm_driver #(det_transaction);
     `uvm_component_utils(det_driver)
 
@@ -30,14 +27,12 @@ class det_driver extends uvm_driver #(det_transaction);
     task run_phase(uvm_phase phase);
         det_transaction tr;
 
-        // --- Initial reset: hold rstn=0 for 5 clock cycles ---
         vif.driver_cb.rstn <= 1'b0;
         vif.driver_cb.in   <= 1'b0;
         repeat (5) @(vif.driver_cb);
         vif.driver_cb.rstn <= 1'b1;
         `uvm_info("DRV", "Initial 5-cycle reset complete", UVM_LOW)
-
-        // --- Main driving loop ---
+-
         forever begin
             seq_item_port.get_next_item(tr);
             drive_item(tr);
@@ -45,11 +40,9 @@ class det_driver extends uvm_driver #(det_transaction);
         end
     endtask
 
-    // -------------------------------------------------------------------------
-    // drive_item: sync to clock edge, apply rstn and din
-    // -------------------------------------------------------------------------
+
     task drive_item(det_transaction tr);
-        @(vif.driver_cb);                   // advance one clock
+        @(vif.driver_cb);                  
         vif.driver_cb.rstn <= tr.rstn;
         vif.driver_cb.in   <= tr.din;
         `uvm_info("DRV",

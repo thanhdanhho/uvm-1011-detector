@@ -1,11 +1,7 @@
 //------------------------------------------------------------------------------
 // Class : det_base_test
 // Description: Base UVM test for det_1011.
-//   - Creates and configures the det_env.
-//   - Reads runtime plusargs (OVERLAP_EN, NUM_CYCLES, UVM_TESTNAME).
-//   - report_phase prints PASS/FAIL based on scoreboard error count.
-//   Subclasses override run_phase to start specific sequences.
-//------------------------------------------------------------------------------
+
 class det_base_test extends uvm_test;
     `uvm_component_utils(det_base_test)
 

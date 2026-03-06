@@ -2,13 +2,6 @@
 //==============================================================================
 // Module : testbench
 // Description: UVM top-level testbench for det_1011.
-//   - Generates clock and drives initial reset (driver takes over immediately)
-//   - Instantiates DUT and det_if interface
-//   - Pushes virtual interface into uvm_config_db
-//   - Calls run_test() to launch the UVM test specified by +UVM_TESTNAME
-//   - Handles VCD waveform dumping based on +DUMP_WAVE plusarg
-//   - Waveform naming: waves/<test>_<seed>_<tool>.vcd
-//==============================================================================
 
 // Import UVM package (must precede `include of UVM macros)
 import uvm_pkg::*;
@@ -41,10 +34,6 @@ module testbench;
         .out  (dut_if.out)
     );
 
-    // -------------------------------------------------------------------------
-    // Waveform dump (VCD — works on both QuestaSim and VCS)
-    // Controlled by +DUMP_WAVE=1 plusarg; file named by +WAVE_FILE=<path>
-    // -------------------------------------------------------------------------
     string wave_file;
     int    dump_wave;
 
@@ -63,14 +52,13 @@ module testbench;
     // -------------------------------------------------------------------------
     // UVM startup
     //   1. Push virtual interface handle into config_db (root scope).
-    //   2. Call run_test() — UVM picks the test class from +UVM_TESTNAME.
+    //   2. Call run_test() 
     // -------------------------------------------------------------------------
     initial begin
         // Provide the virtual interface to every component that asks for "vif"
         uvm_config_db #(virtual det_if)::set(
             uvm_root::get(), "*", "vif", dut_if);
 
-        // Launch UVM test (blocks until all phases complete)
         run_test();
     end
 

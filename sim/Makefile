@@ -1,19 +1,7 @@
 # ==============================================================================
 # Makefile — UVM Verification for det_1011 (Sequence Detector 1011)
 # Supports : QuestaSim (vlog/vsim) and Synopsys VCS (vcs/simv)
-#
-# Quick start:
-#   make compile                       → compile with QuestaSim (default)
-#   make run TEST=test_directed_1011 SEED=1
-#   make run_vcs TEST=test_directed_1011 SEED=1
-#   make regress                       → regression on Questa
-#   make regress_vcs                   → regression on VCS
-#   make clean                         → remove all generated artifacts
-# ==============================================================================
 
-# -----------------------------------------------------------------------
-# Paths (all relative to sim/ directory)
-# -----------------------------------------------------------------------
 SIM_DIR   := $(abspath $(dir $(lastword $(MAKEFILE_LIST))))
 ROOT_DIR  := $(SIM_DIR)/..
 TB_DIR    := $(ROOT_DIR)/tb
@@ -28,9 +16,6 @@ RUN_DO    := $(SIM_DIR)/run.do
 # Compiled output for VCS
 VCS_OUT   := $(SIM_DIR)/simv
 
-# -----------------------------------------------------------------------
-# Default runtime parameters (overridable on command line)
-# -----------------------------------------------------------------------
 TEST       ?= test_directed_1011
 SEED       ?= 1
 VERB       ?= UVM_LOW
@@ -38,17 +23,11 @@ OVERLAP_EN ?= 1
 NUM_CYCLES ?= 1000
 DUMP_WAVE  ?= 1           # 1 = dump waveform, 0 = skip
 
-# -----------------------------------------------------------------------
-# Derived log/wave filenames
-# -----------------------------------------------------------------------
 QUESTA_LOG   := $(LOGS_DIR)/$(TEST)_$(SEED)_questa.log
 QUESTA_WAVE  := $(WAVES_DIR)/$(TEST)_$(SEED)_questa.vcd
 VCS_LOG      := $(LOGS_DIR)/$(TEST)_$(SEED)_vcs.log
 VCS_WAVE     := $(WAVES_DIR)/$(TEST)_$(SEED)_vcs.vcd
 
-# -----------------------------------------------------------------------
-# Common UVM plusargs (shared across both tools)
-# -----------------------------------------------------------------------
 PLUSARGS := \
     +UVM_TESTNAME=$(TEST)         \
     +ntb_random_seed=$(SEED)      \
@@ -91,9 +70,7 @@ VCS_RUN_FLAGS := \
     $(PLUSARGS)                   \
     +WAVE_FILE=$(VCS_WAVE)
 
-# -----------------------------------------------------------------------
-# Regression test list and seeds
-# -----------------------------------------------------------------------
+
 REGRESSION_TESTS := \
     test_reset_basic        \
     test_directed_1011      \
@@ -103,9 +80,6 @@ REGRESSION_TESTS := \
 
 REGRESSION_SEEDS := 1 2 3 42 100
 
-# ==============================================================================
-# TARGETS
-# ==============================================================================
 
 .PHONY: all compile compile_questa compile_vcs \
         run run_vcs regress regress_vcs clean help \
@@ -116,15 +90,10 @@ REGRESSION_SEEDS := 1 2 3 42 100
 # -----------------------------------------------------------------------
 all: compile
 
-# -----------------------------------------------------------------------
-# Create output directories if they don't exist
-# -----------------------------------------------------------------------
+
 _ensure_dirs:
 	@mkdir -p $(LOGS_DIR) $(WAVES_DIR)
 
-# -----------------------------------------------------------------------
-# A) COMPILE — QuestaSim
-# -----------------------------------------------------------------------
 compile compile_questa: _ensure_dirs
 	@echo "================================================================"
 	@echo "  [QUESTA] Compiling..."
@@ -135,9 +104,6 @@ compile compile_questa: _ensure_dirs
 	    2>&1 | tee $(LOGS_DIR)/compile_questa.log
 	@echo "  [QUESTA] Compile done. Log: $(LOGS_DIR)/compile_questa.log"
 
-# -----------------------------------------------------------------------
-# A) COMPILE — VCS
-# -----------------------------------------------------------------------
 compile_vcs: _ensure_dirs
 	@echo "================================================================"
 	@echo "  [VCS] Compiling..."
@@ -146,9 +112,6 @@ compile_vcs: _ensure_dirs
 	    2>&1 | tee $(LOGS_DIR)/compile_vcs.log
 	@echo "  [VCS] Compile done. Log: $(LOGS_DIR)/compile_vcs.log"
 
-# -----------------------------------------------------------------------
-# B) RUN — QuestaSim
-# -----------------------------------------------------------------------
 run: _ensure_dirs
 	@echo "================================================================"
 	@echo "  [QUESTA] Running TEST=$(TEST)  SEED=$(SEED)"
@@ -161,9 +124,6 @@ run: _ensure_dirs
 	@echo "  [QUESTA] Wave: $(QUESTA_WAVE)"
 	@grep -E "(TEST PASSED|TEST FAILED|UVM_ERROR|UVM_FATAL)" $(QUESTA_LOG) || true
 
-# -----------------------------------------------------------------------
-# B) RUN — VCS
-# -----------------------------------------------------------------------
 run_vcs: _ensure_dirs
 	@echo "================================================================"
 	@echo "  [VCS] Running TEST=$(TEST)  SEED=$(SEED)"
@@ -174,9 +134,7 @@ run_vcs: _ensure_dirs
 	@echo "  [VCS] Wave: $(VCS_WAVE)"
 	@grep -E "(TEST PASSED|TEST FAILED|UVM_ERROR|UVM_FATAL)" $(VCS_LOG) || true
 
-# -----------------------------------------------------------------------
-# C) REGRESSION — QuestaSim (all tests × all seeds, parallel-safe)
-# -----------------------------------------------------------------------
+
 regress: _ensure_dirs
 	@echo "================================================================"
 	@echo "  [QUESTA] Regression: $(words $(REGRESSION_TESTS)) tests × $(words $(REGRESSION_SEEDS)) seeds"
@@ -208,9 +166,7 @@ regress: _ensure_dirs
 	echo "================================================================"; \
 	test $$fail -eq 0
 
-# -----------------------------------------------------------------------
-# C) REGRESSION — VCS
-# -----------------------------------------------------------------------
+
 regress_vcs: _ensure_dirs
 	@echo "================================================================"
 	@echo "  [VCS] Regression: $(words $(REGRESSION_TESTS)) tests × $(words $(REGRESSION_SEEDS)) seeds"
@@ -251,9 +207,7 @@ clean:
 	rm -f  transcript ucli.key vc_hdrs.h .vlocker
 	@echo "Clean done."
 
-# -----------------------------------------------------------------------
-# HELP
-# -----------------------------------------------------------------------
+
 help:
 	@echo ""
 	@echo "Usage:"

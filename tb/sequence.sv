@@ -1,13 +1,6 @@
 //==============================================================================
 // File  : sequence.sv
 // Description: All UVM sequences for det_1011 verification.
-//   1. det_base_seq         - base class with helpers; reads plusargs
-//   2. det_reset_seq        - asserts rstn=0 for N cycles then idles
-//   3. det_directed_1011_seq- sends exact 1011 pattern with preamble/postamble
-//   4. det_no_false_pos_seq - sends patterns that must NOT trigger detection
-//   5. det_overlap_seq      - sends 1011011 (overlap) or two separate 1011 (no-overlap)
-//   6. det_random_long_seq  - fully random bits for num_cycles cycles
-//==============================================================================
 
 
 // -----------------------------------------------------------------------------
@@ -133,8 +126,7 @@ class det_no_false_pos_seq extends det_base_seq;
     endfunction
 
     task body();
-        // Helper local task to send a 4-bit pattern + gap
-        // (cannot call external task inside; inline the sends)
+
 
         send_idle(2);
 
