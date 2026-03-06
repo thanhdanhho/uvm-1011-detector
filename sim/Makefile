@@ -47,13 +47,11 @@ PLUSARGS := \
 VLOG_FLAGS := \
     -sv                           \
     +incdir+$(TB_DIR)             \
-    +incdir+$(TESTS_DIR)          \
-    -L uvm
+	+incdir+$(TESTS_DIR)
 
 VSIM_FLAGS := \
     -c                            \
     -sv_seed $(SEED)              \
-    -L uvm                        \
     +UVM_NO_RELNOTES              \
     $(PLUSARGS)                   \
     +WAVE_FILE=$(QUESTA_WAVE)
@@ -151,7 +149,7 @@ regress: compile_questa _ensure_dirs
 	        echo "--- Running $$t seed=$$s ---"; \
 	        log=$(LOGS_DIR)/$$t\_$$s\_questa.log; \
 	        wave=$(QUESTA_WAVES_DIR)/$$t\_$$s\_questa.vcd; \
-	        vsim -c -sv_seed $$s -L uvm +UVM_NO_RELNOTES \
+	        vsim -c -sv_seed $$s +UVM_NO_RELNOTES \
 	            +UVM_TESTNAME=$$t +ntb_random_seed=$$s \
 	            +UVM_VERBOSITY=$(VERB) +OVERLAP_EN=$(OVERLAP_EN) \
 	            +NUM_CYCLES=$(NUM_CYCLES) +DUMP_WAVE=$(DUMP_WAVE) \
