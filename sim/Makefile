@@ -26,6 +26,7 @@ VERB       ?= UVM_LOW
 OVERLAP_EN ?= 1
 NUM_CYCLES ?= 1000
 DUMP_WAVE  ?= 1           # 1 = dump waveform, 0 = skip
+EXTRA_PLUSARGS ?=
 
 QUESTA_LOG   := $(LOGS_DIR)/$(TEST)_$(SEED)_questa.log
 QUESTA_WAVE  := $(QUESTA_WAVES_DIR)/$(TEST)_$(SEED)_questa.vcd
@@ -39,7 +40,8 @@ PLUSARGS := \
     +UVM_VERBOSITY=$(VERB)        \
     +OVERLAP_EN=$(OVERLAP_EN)     \
     +NUM_CYCLES=$(NUM_CYCLES)     \
-    +DUMP_WAVE=$(DUMP_WAVE)
+	+DUMP_WAVE=$(DUMP_WAVE)       \
+	$(EXTRA_PLUSARGS)
 
 # -----------------------------------------------------------------------
 # QuestaSim flags
@@ -207,7 +209,7 @@ regress_vcs: compile_vcs _ensure_dirs
 clean:
 	@echo "Cleaning generated files..."
 	rm -rf work/ $(VCS_OUT) $(SIM_DIR)/simv.daidir csrc
-	rm -rf $(LOGS_DIR)/*.log $(WAVES_DIR)
+	rm -rf $(LOGS_DIR)/*.log $(LOGS_DIR)/*.csv *.csv $(WAVES_DIR)
 	rm -f  transcript ucli.key vc_hdrs.h .vlocker
 	rm -rf .simvision/ *.db *.o *.so *.vpd
 	cd $(ROOT_DIR) && rm -rf verdiLog/ .verdiLog/ novas.conf novas.rc
