@@ -15,7 +15,7 @@
 ../tb/interface.sv
 
 // --- RTL (Design Under Test) ---
-../rtl/dut_1011.sv
+../rtl/det_1011.sv
 
 // --- UVM TB package (contains all classes via `include) ---
 ../tb/pkg.sv

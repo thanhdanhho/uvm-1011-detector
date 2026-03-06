@@ -35,6 +35,7 @@ module testbench;
     );
 
     string wave_file;
+    string fsdb_file;
     int    dump_wave;
 
     initial begin
@@ -43,9 +44,20 @@ module testbench;
         if (dump_wave) begin
             if (!$value$plusargs("WAVE_FILE=%s", wave_file))
                 wave_file = "waves/sim.vcd";
+            
+            // Generate FSDB filename from VCD filename
+            fsdb_file = wave_file.substr(0, wave_file.len()-5);  // remove .vcd
+            fsdb_file = {fsdb_file, ".fsdb"};
+            
+            // Dump VCD format
             $dumpfile(wave_file);
-            $dumpvars(0, testbench);  // dump all signals in this scope
-            `uvm_info("TB", {"Waveform: ", wave_file}, UVM_LOW)
+            $dumpvars(0, testbench);
+            `uvm_info("TB", {"Waveform (VCD): ", wave_file}, UVM_LOW)
+            
+            // Dump FSDB format (Verdi/VCS native)
+            $fsdbDumpfile(fsdb_file);
+            $fsdbDumpvars(0, testbench);
+            `uvm_info("TB", {"Waveform (FSDB): ", fsdb_file}, UVM_LOW)
         end
     end
 

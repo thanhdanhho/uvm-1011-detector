@@ -16,6 +16,10 @@ RUN_DO    := $(SIM_DIR)/run.do
 # Compiled output for VCS
 VCS_OUT   := $(SIM_DIR)/simv
 
+# Tool-specific directories
+QUESTA_WAVES_DIR := $(WAVES_DIR)/questa
+VCS_WAVES_DIR    := $(WAVES_DIR)/vcs
+
 TEST       ?= test_directed_1011
 SEED       ?= 1
 VERB       ?= UVM_LOW
@@ -24,9 +28,10 @@ NUM_CYCLES ?= 1000
 DUMP_WAVE  ?= 1           # 1 = dump waveform, 0 = skip
 
 QUESTA_LOG   := $(LOGS_DIR)/$(TEST)_$(SEED)_questa.log
-QUESTA_WAVE  := $(WAVES_DIR)/$(TEST)_$(SEED)_questa.vcd
+QUESTA_WAVE  := $(QUESTA_WAVES_DIR)/$(TEST)_$(SEED)_questa.vcd
 VCS_LOG      := $(LOGS_DIR)/$(TEST)_$(SEED)_vcs.log
-VCS_WAVE     := $(WAVES_DIR)/$(TEST)_$(SEED)_vcs.vcd
+VCS_WAVE     := $(VCS_WAVES_DIR)/$(TEST)_$(SEED)_vcs.vcd
+VCS_FSDB     := $(VCS_WAVES_DIR)/$(TEST)_$(SEED)_vcs.fsdb
 
 PLUSARGS := \
     +UVM_TESTNAME=$(TEST)         \
@@ -92,7 +97,7 @@ all: compile
 
 
 _ensure_dirs:
-	@mkdir -p $(LOGS_DIR) $(WAVES_DIR)
+	@mkdir -p $(LOGS_DIR) $(WAVES_DIR) $(QUESTA_WAVES_DIR) $(VCS_WAVES_DIR)
 
 compile compile_questa: _ensure_dirs
 	@echo "================================================================"
@@ -112,7 +117,7 @@ compile_vcs: _ensure_dirs
 	    2>&1 | tee $(LOGS_DIR)/compile_vcs.log
 	@echo "  [VCS] Compile done. Log: $(LOGS_DIR)/compile_vcs.log"
 
-run: _ensure_dirs
+run: compile_questa _ensure_dirs
 	@echo "================================================================"
 	@echo "  [QUESTA] Running TEST=$(TEST)  SEED=$(SEED)"
 	@echo "================================================================"
@@ -124,18 +129,19 @@ run: _ensure_dirs
 	@echo "  [QUESTA] Wave: $(QUESTA_WAVE)"
 	@grep -E "(TEST PASSED|TEST FAILED|UVM_ERROR|UVM_FATAL)" $(QUESTA_LOG) || true
 
-run_vcs: _ensure_dirs
+run_vcs: compile_vcs _ensure_dirs
 	@echo "================================================================"
 	@echo "  [VCS] Running TEST=$(TEST)  SEED=$(SEED)"
 	@echo "================================================================"
 	$(VCS_OUT) $(VCS_RUN_FLAGS) \
 	    2>&1 | tee $(VCS_LOG)
-	@echo "  [VCS] Log:  $(VCS_LOG)"
-	@echo "  [VCS] Wave: $(VCS_WAVE)"
+	@echo "  [VCS] Log:   $(VCS_LOG)"
+	@echo "  [VCS] Wave:  $(VCS_WAVE)"
+	@echo "  [VCS] FSDB:  $(VCS_FSDB)"
 	@grep -E "(TEST PASSED|TEST FAILED|UVM_ERROR|UVM_FATAL)" $(VCS_LOG) || true
 
 
-regress: _ensure_dirs
+regress: compile_questa _ensure_dirs
 	@echo "================================================================"
 	@echo "  [QUESTA] Regression: $(words $(REGRESSION_TESTS)) tests × $(words $(REGRESSION_SEEDS)) seeds"
 	@echo "================================================================"
@@ -144,7 +150,7 @@ regress: _ensure_dirs
 	    for s in $(REGRESSION_SEEDS); do \
 	        echo "--- Running $$t seed=$$s ---"; \
 	        log=$(LOGS_DIR)/$$t\_$$s\_questa.log; \
-	        wave=$(WAVES_DIR)/$$t\_$$s\_questa.vcd; \
+	        wave=$(QUESTA_WAVES_DIR)/$$t\_$$s\_questa.vcd; \
 	        vsim -c -sv_seed $$s -L uvm +UVM_NO_RELNOTES \
 	            +UVM_TESTNAME=$$t +ntb_random_seed=$$s \
 	            +UVM_VERBOSITY=$(VERB) +OVERLAP_EN=$(OVERLAP_EN) \
@@ -167,7 +173,7 @@ regress: _ensure_dirs
 	test $$fail -eq 0
 
 
-regress_vcs: _ensure_dirs
+regress_vcs: compile_vcs _ensure_dirs
 	@echo "================================================================"
 	@echo "  [VCS] Regression: $(words $(REGRESSION_TESTS)) tests × $(words $(REGRESSION_SEEDS)) seeds"
 	@echo "================================================================"
@@ -176,7 +182,7 @@ regress_vcs: _ensure_dirs
 	    for s in $(REGRESSION_SEEDS); do \
 	        echo "--- Running $$t seed=$$s ---"; \
 	        log=$(LOGS_DIR)/$$t\_$$s\_vcs.log; \
-	        wave=$(WAVES_DIR)/$$t\_$$s\_vcs.vcd; \
+	        wave=$(VCS_WAVES_DIR)/$$t\_$$s\_vcs.vcd; \
 	        $(VCS_OUT) \
 	            +UVM_TESTNAME=$$t +ntb_random_seed=$$s \
 	            +UVM_VERBOSITY=$(VERB) +OVERLAP_EN=$(OVERLAP_EN) \
@@ -203,8 +209,10 @@ regress_vcs: _ensure_dirs
 clean:
 	@echo "Cleaning generated files..."
 	rm -rf work/ $(VCS_OUT) $(SIM_DIR)/simv.daidir csrc
-	rm -rf $(LOGS_DIR)/*.log $(WAVES_DIR)/*.vcd $(WAVES_DIR)/*.wlf
+	rm -rf $(LOGS_DIR)/*.log $(WAVES_DIR)
 	rm -f  transcript ucli.key vc_hdrs.h .vlocker
+	rm -rf .simvision/ *.db *.o *.so *.vpd
+	cd $(ROOT_DIR) && rm -rf verdiLog/ .verdiLog/ novas.conf novas.rc
 	@echo "Clean done."
 
 

@@ -32,7 +32,6 @@ class det_driver extends uvm_driver #(det_transaction);
         repeat (5) @(vif.driver_cb);
         vif.driver_cb.rstn <= 1'b1;
         `uvm_info("DRV", "Initial 5-cycle reset complete", UVM_LOW)
--
         forever begin
             seq_item_port.get_next_item(tr);
             drive_item(tr);

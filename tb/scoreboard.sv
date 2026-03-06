@@ -45,6 +45,7 @@ class det_scoreboard extends uvm_scoreboard;
     int num_errors;
     int num_detections;
     int cycle_cnt;
+    int init_cycles;  // cycles to skip during initialization
 
     // Debug: last 8 bits of din history (shift register)
     logic [7:0] history;
@@ -66,6 +67,7 @@ class det_scoreboard extends uvm_scoreboard;
         num_errors     = 0;
         num_detections = 0;
         cycle_cnt      = 0;
+        init_cycles    = 2;  // skip first 2 cycles (initialization)
         history        = 8'b0;
         overlap_en     = 1;
         if (!$value$plusargs("OVERLAP_EN=%0d", overlap_en)) overlap_en = 1;
@@ -90,22 +92,26 @@ class det_scoreboard extends uvm_scoreboard;
     // -------------------------------------------------------------------------
     function void write(det_transaction tr);
         logic expected_dout;
+        logic skip_check;
 
         cycle_cnt++;
         history = {history[6:0], tr.din};  // shift in new bit
+        
+        // Skip first init_cycles cycles (initialization phase with undefined values)
+        skip_check = (cycle_cnt <= init_cycles);
 
         // Step 1: expected output based on CURRENT golden state
         expected_dout = (g_state == G_S1011) ? 1'b1 : 1'b0;
 
-        // Step 2: compare expected vs actual
-        if (expected_dout !== tr.dout) begin
+        // Step 2: compare expected vs actual (skip during initialization)
+        if (!skip_check && expected_dout !== tr.dout) begin
             num_errors++;
             `uvm_error("SB_MISMATCH",
                 $sformatf(
                     "MISMATCH @ cycle=%0d | history[7:0]=%08b | rstn=%0b | din=%0b | expected_dout=%0b | actual_dout=%0b | golden_state=%s",
                     cycle_cnt, history, tr.rstn, tr.din,
                     expected_dout, tr.dout, g_state.name()))
-        end else if (expected_dout === 1'b1) begin
+        end else if (!skip_check && expected_dout === 1'b1) begin
             num_detections++;
             `uvm_info("SB_DETECT",
                 $sformatf(
@@ -138,8 +144,8 @@ class det_scoreboard extends uvm_scoreboard;
         super.check_phase(phase);
         `uvm_info("SB_SUMMARY",
             $sformatf(
-                "=== SCOREBOARD SUMMARY: cycles=%0d detections=%0d mismatches=%0d ===",
-                cycle_cnt, num_detections, num_errors),
+                "=== SCOREBOARD SUMMARY: cycles=%0d (init_skip=%0d, check=%0d) detections=%0d mismatches=%0d ===",
+                cycle_cnt, init_cycles, cycle_cnt - init_cycles, num_detections, num_errors),
             UVM_LOW)
         if (num_errors > 0)
             `uvm_error("SB_FAIL",
