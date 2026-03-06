@@ -70,3 +70,39 @@ Quick scan for results:
 ```bash
 grep -E "TEST PASSED|TEST FAILED" logs/*.log
 ```
+
+---
+
+## Intentional Fail Debug (For Log Validation)
+
+Use this mode when you want to force scoreboard mismatches and verify that
+`SB_MISMATCH`, `SB_FAILPOINT`, and CSV export are working as expected.
+
+```bash
+cd sim/
+
+# Force a known golden mismatch in scoreboard
+make run TEST=test_directed_1011 SEED=1 DUMP_WAVE=0 \
+	EXTRA_PLUSARGS="+SB_FAULT_INJECT=1 +SB_FAIL_PRINT_MAX=20"
+```
+
+Expected log IDs:
+```bash
+grep -E "SB_MISMATCH|SB_FAIL_GOLDEN|SB_FAILPOINT|SB_FAIL_CSV" logs/test_directed_1011_1_questa.log
+```
+
+CSV fail-point output (auto-generated when mismatches exist):
+```bash
+logs/<UVM_TESTNAME>_<SEED>_sb_failpoints.csv
+# Example:
+logs/test_directed_1011_1_sb_failpoints.csv
+```
+
+Optional plusargs:
+```bash
++SB_FAIL_CSV=0
+# Disable CSV generation
+
++SB_FAIL_CSV_FILE=../logs/custom_failpoints.csv
+# Override CSV output path/name
+```

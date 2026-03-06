@@ -11,6 +11,7 @@ package det_pkg;
 
     // ---- UVM components ----
     `include "transaction.sv"
+    `include "test_cfg.sv"
     `include "sequencer.sv"
     `include "sequence.sv"
     `include "driver.sv"
