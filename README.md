@@ -70,4 +70,3 @@ Quick scan for results:
 ```bash
 grep -E "TEST PASSED|TEST FAILED" logs/*.log
 ```
->>>>>>> b7ec471 (Initial commit)
